@@ -1,0 +1,15 @@
+{
+  "extends": "@tqman/tsconfig",
+  "compilerOptions": {
+    "incremental": true,
+    "verbatimModuleSyntax": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "noEmit": true,
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  },
+  "include": ["src", "scripts"],
+  "exclude": ["node_modules", "dist"]
+}
