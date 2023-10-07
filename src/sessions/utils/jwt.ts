@@ -4,7 +4,7 @@ import env from "~/env";
 
 import type { UserSession } from "../sessions.schema";
 
-const ISSUER = "api.todos";
+const ISSUER = env.JWT_ISSUER ?? "api.todos";
 
 type TokenType = "access" | "refresh";
 

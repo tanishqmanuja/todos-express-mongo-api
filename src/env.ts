@@ -20,6 +20,7 @@ const envSchema = z.object({
     .string()
     .transform(v => ms(v))
     .pipe(z.number()),
+  JWT_ISSUER: z.string().optional(),
 });
 
 export default envSchema.parse(process.env);
