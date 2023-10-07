@@ -1,0 +1,8 @@
+# Ignore everything
+/*
+
+# Except
+!scripts
+!src
+!README.md
+!tsconfig.json
