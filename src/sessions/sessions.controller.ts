@@ -35,7 +35,7 @@ class SessionsController {
       userId: foundUser.id,
       sessionId,
     });
-    const refreshToken = signToken("access", {
+    const refreshToken = signToken("refresh", {
       userId: foundUser.id,
       sessionId,
     });
