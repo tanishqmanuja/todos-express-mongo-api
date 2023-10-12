@@ -42,7 +42,7 @@ class UsersController {
     res: Response<{}, { session: UserSession }>,
     next: NextFunction,
   ) {
-    const foundUser = await User.findById(res.locals.session);
+    const foundUser = await User.findById(res.locals.session.userId);
 
     if (!foundUser) {
       return next(createHttpError.NotFound());
