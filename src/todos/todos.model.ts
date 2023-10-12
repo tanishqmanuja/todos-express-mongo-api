@@ -9,6 +9,10 @@ export const TodoEntitySchema = new Schema({
     type: Boolean,
     default: false,
   },
+  isStarred: {
+    type: Boolean,
+    default: false,
+  },
   userId: {
     type: SchemaTypes.ObjectId,
     ref: "User",

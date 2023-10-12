@@ -6,6 +6,7 @@ export const TodoDTOSchema = z.object({
     .string({ required_error: "Title is required" })
     .min(1, "Title should not be empty"),
   isCompleted: z.boolean().default(false),
+  isStarred: z.boolean().default(false),
 });
 
 export type TodoInsertSchema = z.infer<typeof TodoDTOSchema>;
