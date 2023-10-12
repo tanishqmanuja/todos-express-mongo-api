@@ -7,6 +7,8 @@ import env from "~/env";
 
 export async function connectToMongoDB() {
   const promise = connect(env.MONGO_DB_URI, {
+    user: env.MONGO_DB_USER,
+    pass: env.MONGO_DB_PASSWORD,
     dbName: env.MONGO_DB_NAME,
   });
 
@@ -23,6 +25,7 @@ export async function connectToMongoDB() {
 export async function connectToRedis() {
   const client = createClient({
     url: env.REDIS_URI,
+    password: env.REDIS_PASSWORD,
   });
 
   const promise = client.connect().then(() => client);
