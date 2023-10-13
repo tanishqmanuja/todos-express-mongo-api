@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import env from "~/env";
 import redis from "~/shared/db/redis";
+import { computeResult } from "~/shared/lib/result";
 import { compare } from "~/shared/lib/scrypt";
 import { User } from "~/users/users.model";
 
@@ -60,9 +61,14 @@ class SessionsController {
       return next(createHttpError.BadRequest());
     }
 
-    const decoded = verifyToken("refresh", refreshToken);
-    const userId = decoded.sub;
-    const sessionId = decoded.jti;
+    const decoded = computeResult(() => verifyToken("refresh", refreshToken));
+
+    if (!decoded.ok) {
+      return next(createHttpError.Unauthorized());
+    }
+
+    const userId = decoded.value.sub;
+    const sessionId = decoded.value.jti;
 
     const issuedRefreshToken = await redis.client.get(`${userId}:${sessionId}`);
 
@@ -95,9 +101,14 @@ class SessionsController {
       return next(createHttpError.BadRequest());
     }
 
-    const decoded = verifyToken("refresh", refreshToken);
-    const userId = decoded.sub;
-    const sessionId = decoded.jti;
+    const decoded = computeResult(() => verifyToken("refresh", refreshToken));
+
+    if (!decoded.ok) {
+      return next(createHttpError.Unauthorized());
+    }
+
+    const userId = decoded.value.sub;
+    const sessionId = decoded.value.jti;
 
     await redis.client.del(`${userId}:${sessionId}`);
 
