@@ -11,4 +11,3 @@ dist
 .env
 .env.*
 !.env.sample
-!database/.env
