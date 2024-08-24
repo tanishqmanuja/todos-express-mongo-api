@@ -4,7 +4,11 @@ node_modules
 # output
 dist
 
+# db
+.storage
+
 # env
 .env
 .env.*
 !.env.sample
+!database/.env
