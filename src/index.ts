@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import ora from "ora";
+import { SocketClosedUnexpectedlyError } from "redis";
 
 import app from "./app";
 import env, { isProduction } from "./env";
@@ -30,8 +31,13 @@ try {
 }
 
 /* Handle Uncaught Exceptions */
-process.on("uncaughtException", () => {
-  ora().fail(`${chalk.gray("[Server]")} Uncaught Exception`);
+process.on("uncaughtException", (e) => {
+  if(e instanceof SocketClosedUnexpectedlyError) {
+    ora().fail(`${chalk.gray("[Server]")} Redis Socket Closed Unexpectedly`);
+  } else {
+    ora().fail(`${chalk.gray("[Server]")} Uncaught Exception`);
+  }
+
   process.exit(1);
 });
 
